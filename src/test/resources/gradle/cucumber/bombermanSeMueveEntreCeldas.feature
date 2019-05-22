@@ -7,3 +7,8 @@ Scenario: Bomberman intenta moverse de una celda a una celda contigua vacia
  Given un Bomberman con una celda vacia al "Norte"
  When Bomberman se mueve al "Norte"
  Then Bomberman cambia su posicion
+
+Scenario: Bomberman intenta moverse de una celda a una celda contigua ocupada por una pared
+ Given un bomberman con una celda ocupada por una pared ubicada al "Norte"
+ When Bomberman se mueve al "Norte"
+ Then Bomberman no cambia de celda

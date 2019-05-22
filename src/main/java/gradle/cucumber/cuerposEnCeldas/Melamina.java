@@ -2,7 +2,7 @@ package gradle.cucumber.cuerposEnCeldas;
 
 import gradle.cucumber.Celda;
 
-public class Melamina extends Cuerpo{
+public class Melamina extends Pared{
 
 	public Melamina(Celda celdaActual) {
 		this.setCeldaActual(celdaActual);
@@ -11,6 +11,6 @@ public class Melamina extends Cuerpo{
 
 	@Override
 	public void serDestruido() {
-		this.getCeldaActual().setCuerpoActual(null);;
+		this.getCeldaActual().setCuerpoActual(null);
 	}
 }
