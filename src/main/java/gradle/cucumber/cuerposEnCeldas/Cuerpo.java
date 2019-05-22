@@ -2,7 +2,7 @@ package gradle.cucumber.cuerposEnCeldas;
 
 import gradle.cucumber.Celda;
 
-public class Cuerpo {
+public abstract class Cuerpo {
 	
 	public Celda celdaActual;
 
@@ -17,5 +17,9 @@ public class Cuerpo {
 
 	public void serDestruido() {
 	}
-	
+
+	public abstract boolean sePuedeAtravezar();
+
+
+
 }
