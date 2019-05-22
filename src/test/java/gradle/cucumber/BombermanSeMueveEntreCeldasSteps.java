@@ -5,6 +5,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gradle.cucumber.cuerposEnCeldas.Bomberman;
+import gradle.cucumber.cuerposEnCeldas.Melamina;
+import gradle.cucumber.cuerposEnCeldas.Pared;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +17,14 @@ import static org.junit.Assert.assertEquals;
 public class BombermanSeMueveEntreCeldasSteps {
     private Celda celdaAnterior = new Celda();
     private Celda nuevaCelda = new Celda();
-    private Bomberman bomberman;
+    private Celda celdaPared = new Celda();
+    private Pared paredMelamina = new Melamina(celdaPared);
+    private Bomberman bomberman = new Bomberman(celdaAnterior);
 
     @Given("^un Bomberman con una celda vacia al \"([^\"]*)\"$")
     public void un_Bomberman_con_una_celda_vacia_al(String dir) {
         celdaAnterior.setCeldaAl(dir,nuevaCelda);
-    	bomberman = new Bomberman(celdaAnterior);
+    	//bomberman = new Bomberman(celdaAnterior);
     }
 
     @When("^Bomberman se mueve al \"([^\"]*)\"$")
@@ -47,6 +51,18 @@ public class BombermanSeMueveEntreCeldasSteps {
 
        //bomberman.getPosicionActual().equals(nuevaCelda);
         //bomberman.getPosicionActual().notEquals(celdaAnterior);
+    }
+
+
+    @Given("^un bomberman con una celda ocupada por una pared ubicada al \"([^\"]*)\"$")
+    public void un_bomberman_con_una_celda_ocupada_por_una_pared_ubicada_al(String dir) {
+        celdaAnterior.setCeldaAl(dir,celdaPared);
+    }
+
+    @Then("^Bomberman no cambia de celda$")
+    public void bomberman_no_cambia_de_celda() {
+        assertTrue(celdaAnterior.getCuerpoActual() != null);
+        assertTrue(nuevaCelda.getCuerpoActual() == null);
     }
 
 

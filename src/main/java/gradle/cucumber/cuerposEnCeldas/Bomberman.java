@@ -5,7 +5,7 @@ import gradle.cucumber.Celda;
 import java.util.List;
 
 public class Bomberman extends Cuerpo{
-	private Celda celdaActual;
+	//private Celda celdaActual;
     
 	public Bomberman(Celda celdaActual) {
 		this.setCeldaActual(celdaActual);
@@ -17,6 +17,8 @@ public class Bomberman extends Cuerpo{
     }
 
     public void moverAl(String dir) {
+		if (puedeMoverAl(dir))
+		{
     	this.getCeldaActual().setCuerpoActual(null);
     	switch(dir) {
     	  case "Sur":
@@ -31,8 +33,28 @@ public class Bomberman extends Cuerpo{
     	  case "Oeste":
 		  this.setCeldaActual(this.getCeldaActual().getCeldaAlOeste());
       	    break;
-    	}
+    	}}
+
     }
+
+	private boolean puedeMoverAl(String dir) {
+		boolean result = false;
+
+		switch(dir) {
+			case "Sur":
+				result = this.getCeldaActual().getCeldaAlSur().sePuedeMoverAca();
+				break;
+			case "Norte":
+				result = this.getCeldaActual().getCeldaAlNorte().sePuedeMoverAca();
+				break;
+			case "Este":
+				result = this.getCeldaActual().getCeldaAlEste().sePuedeMoverAca();
+				break;
+			case "Oeste":
+				result = this.getCeldaActual().getCeldaAlOeste().sePuedeMoverAca();
+				break;}
+		return result;
+	}
 
 	public void dejarBomba(int ticks) {
 		
@@ -40,4 +62,8 @@ public class Bomberman extends Cuerpo{
 	}
 
 
+	@Override
+	public boolean sePuedeAtravezar() {
+		return true;
+	}
 }

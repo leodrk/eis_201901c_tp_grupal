@@ -99,4 +99,12 @@ public class Celda {
 	public void destruirObjeto() {
 		this.getCuerpoActual().serDestruido();
 	}
+
+    public boolean sePuedeMoverAca() {
+		if (cuerpoActual == null){
+			return true;
+		} else
+		{
+		 return cuerpoActual.sePuedeAtravezar();
+    }}
 }
