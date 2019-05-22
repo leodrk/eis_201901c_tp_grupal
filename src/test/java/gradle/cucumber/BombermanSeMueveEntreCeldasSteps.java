@@ -13,18 +13,14 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class BombermanSeMueveEntreCeldasSteps {
-    private Celda celdsAnterior = new Celda();
+    private Celda celdaAnterior = new Celda();
     private Celda nuevaCelda = new Celda();
-    private List<Celda> celdas = new ArrayList<>();
-    private Bomberman bomberman = new Bomberman();
-
+    private Bomberman bomberman;
 
     @Given("^un Bomberman con una celda vacia al \"([^\"]*)\"$")
     public void un_Bomberman_con_una_celda_vacia_al(String dir) {
-        bomberman.setPosicionActual(celdsAnterior);
-        celdsAnterior.setCuerpoActual(bomberman);
-        celdas.add(nuevaCelda);
-        bomberman.setCeldasAl(celdas, dir);
+        celdaAnterior.setCeldaAl(dir,nuevaCelda);
+    	bomberman = new Bomberman(celdaAnterior);
     }
 
     @When("^Bomberman se mueve al \"([^\"]*)\"$")
@@ -34,9 +30,9 @@ public class BombermanSeMueveEntreCeldasSteps {
 
     @Then("^Bomberman cambia su posicion$")
     public void bomberman_cambia_su_posicion() {
-
-        assertTrue(celdsAnterior.isEmpty());
-        assertTrue(bomberman.getCeldaActual().equals(nuevaCelda));
+		
+        assertTrue(celdaAnterior.getCuerpoActual() == null);
+        assertTrue(nuevaCelda.getCuerpoActual() != null);
 
         //assertTrue(celdas.get(0).getCuerpoActual().equals(bomberman));
         //assertTrue(bomberman.getCeldasAlNorte().getCuerpoActual().equals(bomberman));

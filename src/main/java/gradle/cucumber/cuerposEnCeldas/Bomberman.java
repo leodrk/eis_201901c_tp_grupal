@@ -5,27 +5,39 @@ import gradle.cucumber.Celda;
 import java.util.List;
 
 public class Bomberman extends Cuerpo{
+	private Celda celdaActual;
+    
+	public Bomberman(Celda celdaActual) {
+		this.setCeldaActual(celdaActual);
+		this.getCeldaActual().setCuerpoActual(this);
+	}
 
-    public void setPosicionActual(Celda unaCelda) {
-        this.celdaActual = unaCelda;
-    }
-
-    public void setCeldasAl(List<Celda> celdas, String dir) {
-        // hardcodeado, despues se harian direcciones con el enum (?
-        celdasAlNorte = celdas;
+	public void setPosicionActual(Celda unaCelda) {
+        this.setCeldaActual(unaCelda);
     }
 
     public void moverAl(String dir) {
-        // hardcodeado, dspues se implementarian direcciones (?
-
-        celdaActual.setCuerpoActual(null);
-        celdasAlNorte.get(0).setCuerpoActual(this);
-        celdaActual = celdasAlNorte.get(0);
-        reorganizarCeldasMoviendoseAl(dir);
+    	this.getCeldaActual().setCuerpoActual(null);
+    	switch(dir) {
+    	  case "Sur":
+    	    this.setCeldaActual(this.getCeldaActual().getCeldaAlSur());
+    	    break;
+    	  case "Norte":
+		  this.setCeldaActual(this.getCeldaActual().getCeldaAlNorte());
+    	    break;
+    	  case "Este":
+		  this.setCeldaActual(this.getCeldaActual().getCeldaAlEste());
+      	    break;
+    	  case "Oeste":
+		  this.setCeldaActual(this.getCeldaActual().getCeldaAlOeste());
+      	    break;
+    	}
     }
 
-    private void reorganizarCeldasMoviendoseAl(String dir) {
-        //todo la idea seria que las listas de celdas en direcciones norte sur este y oeste se actualizen cada vez que haya un movimiento
+	public void dejarBomba(int ticks) {
+		
+		this.getCeldaActual().setBombaActual(new Bomba(ticks, this.getCeldaActual()));
+	}
 
-    }
+
 }
