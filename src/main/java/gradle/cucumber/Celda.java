@@ -129,12 +129,4 @@ public class Celda {
 		}
 		this.destruirObjeto();
 	}
-
-    public boolean sePuedeMoverAca() {
-		if (cuerpoActual == null){
-			return true;
-		} else
-		{
-		 return cuerpoActual.sePuedeAtravezar();
-    }}
 }
