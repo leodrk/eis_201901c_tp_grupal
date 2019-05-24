@@ -97,7 +97,9 @@ public class Celda {
 
 
 	public void destruirObjeto() {
+		if(this.getCuerpoActual() != null) {
 		this.getCuerpoActual().serDestruido();
+		}
 	}
 
     public boolean sePuedeMoverAca() {
@@ -106,5 +108,26 @@ public class Celda {
 		} else
 		{
 		 return cuerpoActual.sePuedeAtravezar();
-    }}
+		}
+	}
+
+	public void ondaExpansiva(String dir, int alcanceFaltante) {
+		if (alcanceFaltante > 0) {
+			switch(dir) {
+		  	  case "Sur":
+		  		  if (this.getCeldaAlSur() != null) this.getCeldaAlSur().ondaExpansiva("Sur", alcanceFaltante - 1);
+		  	    break;
+		  	  case "Norte":
+		  		if (this.getCeldaAlNorte() != null) this.getCeldaAlNorte().ondaExpansiva("Norte", alcanceFaltante - 1);
+		  	    break;
+		  	  case "Este":
+		  		if (this.getCeldaAlEste() != null) this.getCeldaAlEste().ondaExpansiva("Este", alcanceFaltante - 1);
+		    	    break;
+		  	  case "Oeste":
+		  		if (this.getCeldaAlOeste() != null) this.getCeldaAlOeste().ondaExpansiva("Oeste", alcanceFaltante - 1);
+		    	    break;
+			}
+		}
+		this.destruirObjeto();
+	}
 }
