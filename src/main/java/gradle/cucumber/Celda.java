@@ -102,14 +102,13 @@ public class Celda {
 		}
 	}
 
-    public boolean sePuedeMoverAca() {
-		if (this.getCuerpoActual() == null){
+	public boolean sePuedeMoverAca() {
+		if (cuerpoActual == null){
 			return true;
 		} else
 		{
-		 return this.getCuerpoActual().sePuedeAtravezar();
-		}
-	}
+		 return cuerpoActual.sePuedeAtravezar();
+    }}
 
 	public void ondaExpansiva(String dir, int alcanceFaltante) {
 		if (alcanceFaltante > 0) {
