@@ -5,7 +5,6 @@ import gradle.cucumber.Celda;
 import java.util.List;
 
 public class Bomberman extends Cuerpo{
-	//private Celda celdaActual;
     
 	public Bomberman(Celda celdaActual) {
 		this.setCeldaActual(celdaActual);

@@ -103,11 +103,11 @@ public class Celda {
 	}
 
     public boolean sePuedeMoverAca() {
-		if (cuerpoActual == null){
+		if (this.getCuerpoActual() == null){
 			return true;
 		} else
 		{
-		 return cuerpoActual.sePuedeAtravezar();
+		 return this.getCuerpoActual().sePuedeAtravezar();
 		}
 	}
 
