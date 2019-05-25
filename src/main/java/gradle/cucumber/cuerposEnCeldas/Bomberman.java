@@ -6,10 +6,26 @@ import java.util.List;
 
 public class Bomberman extends Cuerpo{
 	//private Celda celdaActual;
+	private boolean lanzamientoDeBombas;
     
 	public Bomberman(Celda celdaActual) {
 		this.setCeldaActual(celdaActual);
 		this.getCeldaActual().setCuerpoActual(this);
+		this.lanzamientoDeBombas = false;
+	}
+
+	public boolean puedeObtenerPoderLanzarBombas(Bagulaa bagulaa){
+			if( bagulaa.getVida()>0){
+				return lanzamientoDeBombas;
+			}
+			else{
+				setLanzamientoDeBombas(true);
+				return lanzamientoDeBombas;
+			}
+	}
+
+	public void setLanzamientoDeBombas(boolean lanzamientoDeBombas) {
+		this.lanzamientoDeBombas = lanzamientoDeBombas;
 	}
 
 	public void setPosicionActual(Celda unaCelda) {

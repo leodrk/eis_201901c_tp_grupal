@@ -25,6 +25,7 @@ public class BombermanDejaBombas {
     @When("^bomberman deja una bomba de \"([^\"]*)\"$")
     public void bomberman_deja_una_bomba_de(String tiempo) {
     	bomberman.dejarBomba(Integer.parseInt(tiempo));
+
     }
 
     @Then("^la bomba explota y rompe la pared$")
