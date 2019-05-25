@@ -29,8 +29,10 @@ public class Bomba{
 
 	private void explotar() {
 		this.getCeldaActual().setBombaActual(null);
-		//por ahora hardcodeado, solo destruye lo que esta en la celda inmediata hacia el norte de la actual
-		this.getCeldaActual().getCeldaAlNorte().destruirObjeto();
+		celdaActual.ondaExpansiva("Norte",3);
+		celdaActual.ondaExpansiva("Sur",3);
+		celdaActual.ondaExpansiva("Este",3);
+		celdaActual.ondaExpansiva("Oeste",3);
 	}
 
 	public Celda getCeldaActual() {
