@@ -5,15 +5,19 @@ import gradle.cucumber.Celda;
 import java.util.List;
 
 public class Bomberman extends Cuerpo{
-    
+
+	private Boolean estavivo;
+
+	public Bomberman(Celda celdaActual) {
+		super(celdaActual);
+	}
+ /*
 	public Bomberman(Celda celdaActual) {
 		this.setCeldaActual(celdaActual);
 		this.getCeldaActual().setCuerpoActual(this);
-	}
+	}*/
 
-	public void setPosicionActual(Celda unaCelda) {
-        this.setCeldaActual(unaCelda);
-    }
+
 
     public void moverAl(String dir) {
 		if (puedeMoverAl(dir))
@@ -41,16 +45,16 @@ public class Bomberman extends Cuerpo{
 
 		switch(dir) {
 			case "Sur":
-				result = this.getCeldaActual().getCeldaAlSur().sePuedeMoverAca();
+				result = this.getCeldaActual().getCeldaAlSur().sePuedeMoverAca(this);
 				break;
 			case "Norte":
-				result = this.getCeldaActual().getCeldaAlNorte().sePuedeMoverAca();
+				result = this.getCeldaActual().getCeldaAlNorte().sePuedeMoverAca(this);
 				break;
 			case "Este":
-				result = this.getCeldaActual().getCeldaAlEste().sePuedeMoverAca();
+				result = this.getCeldaActual().getCeldaAlEste().sePuedeMoverAca(this);
 				break;
 			case "Oeste":
-				result = this.getCeldaActual().getCeldaAlOeste().sePuedeMoverAca();
+				result = this.getCeldaActual().getCeldaAlOeste().sePuedeMoverAca(this);
 				break;}
 		return result;
 	}
@@ -62,7 +66,25 @@ public class Bomberman extends Cuerpo{
 
 
 	@Override
-	public boolean sePuedeAtravezar() {
+	public boolean sePuedeAtravezar(Bomberman bomberman) {
 		return true;
 	}
+
+	public void muere() {
+		estavivo = false;
+	}
+
+	public Boolean getEstavivo() {
+		return estavivo;
+	}
+
+	public void setEstavivo(Boolean estavivo) {
+		this.estavivo = estavivo;
+	}
 }
+
+// Codigo a borrar
+/*
+ public void setPosicionActual(Celda unaCelda) {
+        this.setCeldaActual(unaCelda);
+    }*/
