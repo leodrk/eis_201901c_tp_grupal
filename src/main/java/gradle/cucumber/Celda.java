@@ -1,6 +1,7 @@
 package gradle.cucumber;
 
 import gradle.cucumber.cuerposEnCeldas.Bomba;
+import gradle.cucumber.cuerposEnCeldas.Bomberman;
 import gradle.cucumber.cuerposEnCeldas.Cuerpo;
 
 public class Celda {
@@ -48,7 +49,7 @@ public class Celda {
 	public void setCeldaAlOeste(Celda celdaAlOeste) {
 		this.celdaAlOeste = celdaAlOeste;
 	}
-	
+
 	public void setCeldaAl(String dir, Celda celda) {
 		switch(dir) {
   	  case "Sur":
@@ -102,13 +103,13 @@ public class Celda {
 		}
 	}
 
-	public boolean sePuedeMoverAca() {
+	public boolean sePuedeMoverAca(Bomberman bomberman) {
 		if (cuerpoActual == null){
 			return true;
 		} else
 		{
-		 return cuerpoActual.sePuedeAtravezar();
-    }}
+			return cuerpoActual.sePuedeAtravezar(bomberman);
+		}}
 
 	public void ondaExpansiva(String dir, int alcanceFaltante) {
 		if (alcanceFaltante > 0) {
@@ -130,3 +131,17 @@ public class Celda {
 		this.destruirObjeto();
 	}
 }
+
+// codigo a borrar
+
+/*
+*
+
+	public boolean sePuedeMoverAca() {
+		if (cuerpoActual == null){
+			return true;
+		} else
+		{
+		 return cuerpoActual.sePuedeAtravezar();
+    }}
+* */

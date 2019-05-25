@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gradle.cucumber.cuerposEnCeldas.Bomberman;
+import gradle.cucumber.cuerposEnCeldas.Enemigo;
 import gradle.cucumber.cuerposEnCeldas.Melamina;
 import gradle.cucumber.cuerposEnCeldas.Pared;
 
@@ -13,18 +14,21 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class BombermanSeMueveEntreCeldasSteps {
     private Celda celdaAnterior = new Celda();
     private Celda nuevaCelda = new Celda();
     private Celda celdaPared = new Celda();
+    private Celda celdaConEnemigo = new Celda();
     private Pared paredMelamina = new Melamina(celdaPared);
     private Bomberman bomberman = new Bomberman(celdaAnterior);
+    private Enemigo enemigo = new Enemigo(celdaConEnemigo);
+
 
     @Given("^un Bomberman con una celda vacia al \"([^\"]*)\"$")
     public void un_Bomberman_con_una_celda_vacia_al(String dir) {
         celdaAnterior.setCeldaAl(dir,nuevaCelda);
-    	//bomberman = new Bomberman(celdaAnterior);
     }
 
     @When("^Bomberman se mueve al \"([^\"]*)\"$")
@@ -37,20 +41,6 @@ public class BombermanSeMueveEntreCeldasSteps {
 		
         assertTrue(celdaAnterior.getCuerpoActual() == null);
         assertTrue(nuevaCelda.getCuerpoActual() != null);
-
-        //assertTrue(celdas.get(0).getCuerpoActual().equals(bomberman));
-        //assertTrue(bomberman.getCeldasAlNorte().getCuerpoActual().equals(bomberman));
-
-
-        //assertTrue(true);
-       // assertEquals(bomberman.getCeldaActual() , nuevaCelda);
-       // assertEquals(bomberman.getCeldaActual(),celdaAnterior);
-        //   assertEquals(bomberman.getCeldaActual() , nuevaCelda);
-     //   assertNotEquals(bomberman.getCeldaActual(),celdaAnterior);
-
-
-       //bomberman.getPosicionActual().equals(nuevaCelda);
-        //bomberman.getPosicionActual().notEquals(celdaAnterior);
     }
 
 
@@ -63,6 +53,15 @@ public class BombermanSeMueveEntreCeldasSteps {
     public void bomberman_no_cambia_de_celda() {
         assertTrue(celdaAnterior.getCuerpoActual() != null);
         assertTrue(nuevaCelda.getCuerpoActual() == null);
+    }
+
+    @Given("^un bomberman con una celda ocupada por un enemigo al \"([^\"]*)\"$")
+    public void un_bomberman_con_una_celda_ocupada_por_un_enemigo_al(String dir) {
+        celdaAnterior.setCeldaAl(dir,celdaConEnemigo);
+    }
+    @Then("^Bomberman pasa a estar muerto$")
+    public void bomberman_pasa_a_estar_muerto() {
+       assertFalse(bomberman.getEstavivo());
     }
 
 
