@@ -104,12 +104,14 @@ public class Celda {
 	}
 
 	public boolean sePuedeMoverAca(Bomberman bomberman) {
-		if (cuerpoActual == null){
+		if (cuerpoActual == null && bombaActual == null)
+		{
 			return true;
 		} else
 		{
 			return cuerpoActual.sePuedeAtravezar(bomberman);
-		}}
+		}
+	}
 
 	public void ondaExpansiva(String dir, int alcanceFaltante) {
 		if (alcanceFaltante > 0) {

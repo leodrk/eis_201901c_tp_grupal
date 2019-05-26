@@ -20,8 +20,7 @@ public abstract class Cuerpo {
 		celdaActual.setCuerpoActual(this);
 	}
 
-	public void serDestruido() {
-	}
+	public abstract void serDestruido();
 
 	public abstract boolean sePuedeAtravezar(Bomberman bomberman);
 

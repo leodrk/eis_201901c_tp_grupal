@@ -4,10 +4,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gradle.cucumber.cuerposEnCeldas.Bomberman;
-import gradle.cucumber.cuerposEnCeldas.Enemigo;
-import gradle.cucumber.cuerposEnCeldas.Melamina;
-import gradle.cucumber.cuerposEnCeldas.Pared;
+import gradle.cucumber.cuerposEnCeldas.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,8 @@ public class BombermanSeMueveEntreCeldasSteps {
     private Celda celdaConEnemigo = new Celda();
     private Pared paredMelamina = new Melamina(celdaPared);
     private Bomberman bomberman = new Bomberman(celdaAnterior);
-    private Enemigo enemigo = new Enemigo(celdaConEnemigo);
+    private List<Poder> poderes = new ArrayList();
+    private Enemigo enemigo = new ProtoMaxUnits(celdaConEnemigo, poderes);
 
 
     @Given("^un Bomberman con una celda vacia al \"([^\"]*)\"$")
@@ -64,32 +62,4 @@ public class BombermanSeMueveEntreCeldasSteps {
        assertFalse(bomberman.getEstavivo());
     }
 
-
-
-/*    @Given("^un Bomberman posicionado en \"([^\"]*)\"$")
-    public void un_Bomberman_posicionado_en(String nombreCelda) {
-        celdaAnterior.setName(nombreCelda);
-        bomberman.setPosicionActual(celdaAnterior);
-        celdaAnterior.setCuerpoActual(bomberman);
-    }
-
-    @Given("^hay una \"([^\"]*)\" al \"([^\"]*)\"$")
-    public void hay_una_al(String nombreCelda, String dir) {
-        nuevaCelda.setName(nombreCelda);
-        bomberman.setCeldaAl(nuevaCelda, dir);
-    }
-    @When("^Bomberman se mueve al \"([^\"]*)\"$")
-    public void bomberman_se_mueve_al(String dir) {
-        bomberman.moverAl(dir);
-    }
-    @Then("^Bomberman se posiciona en la \"([^\"]*)\"$")
-    public void bomberman_se_posiciona_en_la(String arg1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-    @Then("^la \"([^\"]*)\" esta vacia$")
-    public void la_esta_vacia(String arg1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }*/
 }
