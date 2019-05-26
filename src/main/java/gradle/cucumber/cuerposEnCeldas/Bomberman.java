@@ -41,7 +41,12 @@ public class Bomberman extends Cuerpo{
 	public void dejarBomba(int ticks) {
 		this.getCeldaActual().setBombaActual(new Bomba(ticks, this.getCeldaActual()));
 	}
-	
+
+	@Override
+	public void dejarPoder(int parseInt) {
+
+	}
+
 	public void muere() {
         estavivo = false;
         celdaActual.setCuerpoActual(null);
@@ -86,4 +91,9 @@ public class Bomberman extends Cuerpo{
 
 	@Override
 	protected void rebotarBomba(String dir, int ticks) {}
+
+	@Override
+	protected void setPoder(Ninguno ninguno) {
+
+	}
 }
