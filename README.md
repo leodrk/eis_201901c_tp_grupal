@@ -16,7 +16,7 @@ tEjercitar la escritura de código en ambientes colaborativos utilizando una met
 Nro | Nombre | Legajo | Mail
 ----|--------|--------|------
 1   |   Marcelo Leonel Martos     | 20666        | martos.marcelo@gmail.com
-2   |        |        |
+2   |   Eric Jorge Arnez Inochea     | 26806       | ericarnez@gmail.com
 3   |        |        |
 4   |        |        |
     
