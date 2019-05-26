@@ -33,6 +33,20 @@ public abstract class Cuerpo {
 	//cuando recibirBomberman sucede al caer un bomberman en la celda luego de saltar una pared.
 	protected abstract void recibirBomberman(Bomberman bomberman, String dir);
 
-	protected abstract void rebotarBomba(String dir, int ticks);  
-	
+	protected abstract void rebotarBomba(String dir, int ticks);
+
+    protected abstract void setPoder(Ninguno ninguno);
+
+    public abstract void dejarBomba(int parseInt);
+
+	public abstract void dejarPoder(int parseInt);
+
+    public void dejarBomba() {
+    }
+
+	public void dejarPoder() {
+	}
+
+	public void saltarPared() {
+	}
 }

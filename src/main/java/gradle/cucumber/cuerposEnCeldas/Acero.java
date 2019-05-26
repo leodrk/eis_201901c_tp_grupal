@@ -13,4 +13,19 @@ public class Acero extends Pared {
 
 	@Override
 	public void chocarConBomberman(Bomberman bomberman) {}
+
+	@Override
+	protected void setPoder(Ninguno ninguno) {
+
+	}
+
+	@Override
+	public void dejarBomba(int parseInt) {
+
+	}
+
+	@Override
+	public void dejarPoder(int parseInt) {
+
+	}
 }
