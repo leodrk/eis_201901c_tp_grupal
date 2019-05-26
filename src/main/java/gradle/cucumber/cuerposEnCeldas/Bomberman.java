@@ -7,9 +7,16 @@ import java.util.List;
 public class Bomberman extends Cuerpo{
 
 	private Boolean estavivo;
+	private int cantidadDeBombasALanzar = 1;
 
 	public Bomberman(Celda celdaActual) {
 		super(celdaActual);
+	}
+
+	@Override
+	public void serDestruido() {
+		estavivo = false;
+		celdaActual.setCuerpoActual(null);
 	}
  /*
 	public Bomberman(Celda celdaActual) {
@@ -60,10 +67,10 @@ public class Bomberman extends Cuerpo{
 	}
 
 	public void dejarBomba(int ticks) {
-		
-		this.getCeldaActual().setBombaActual(new Bomba(ticks, this.getCeldaActual()));
+		if (cantidadDeBombasALanzar > 0) {
+			this.getCeldaActual().setBombaActual(new Bomba(ticks, this.getCeldaActual()));
+		}
 	}
-
 
 	@Override
 	public boolean sePuedeAtravezar(Bomberman bomberman) {
@@ -71,7 +78,8 @@ public class Bomberman extends Cuerpo{
 	}
 
 	public void muere() {
-		estavivo = false;
+        estavivo = false;
+        celdaActual.setCuerpoActual(null);
 	}
 
 	public Boolean getEstavivo() {
@@ -80,6 +88,14 @@ public class Bomberman extends Cuerpo{
 
 	public void setEstavivo(Boolean estavivo) {
 		this.estavivo = estavivo;
+	}
+
+	public int getCantidadDeBombasALanzar() {
+		return cantidadDeBombasALanzar;
+	}
+
+	public void setCantidadDeBombasALanzar(int cantidadDeBombasALanzar) {
+		this.cantidadDeBombasALanzar = cantidadDeBombasALanzar;
 	}
 }
 
