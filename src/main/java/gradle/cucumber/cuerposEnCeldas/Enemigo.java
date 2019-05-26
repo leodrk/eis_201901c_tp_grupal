@@ -2,7 +2,9 @@ package gradle.cucumber.cuerposEnCeldas;
 
 import gradle.cucumber.Celda;
 
-public abstract class Enemigo extends Cuerpo {
+
+public class Enemigo extends Cuerpo {
+
     public Enemigo(Celda celdaActual) {
         super(celdaActual);
     }
@@ -12,6 +14,9 @@ public abstract class Enemigo extends Cuerpo {
         bomberman.muere();
         return true;
     }
-
+    @Override
+    public void serDestruido() {
+    	this.getCeldaActual().setCuerpoActual(null);
+    }
 
 }
