@@ -17,4 +17,9 @@ public class Melamina extends Pared{
 	public void serDestruido() {
 		this.getCeldaActual().setCuerpoActual(null);
 	}
+
+
+	@Override
+	public void chocarConBomberman(Bomberman bomberman) {
+	}
 }

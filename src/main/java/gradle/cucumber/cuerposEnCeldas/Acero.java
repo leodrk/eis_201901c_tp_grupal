@@ -9,6 +9,8 @@ public class Acero extends Pared {
 	}
 
 	@Override
-	public void serDestruido() {
-	}
+	public void serDestruido() {}
+
+	@Override
+	public void chocarConBomberman(Bomberman bomberman) {}
 }

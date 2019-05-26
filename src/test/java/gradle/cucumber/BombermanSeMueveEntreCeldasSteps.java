@@ -21,7 +21,7 @@ public class BombermanSeMueveEntreCeldasSteps {
     private Pared paredMelamina = new Melamina(celdaPared);
     private Bomberman bomberman = new Bomberman(celdaAnterior);
     private List<Poder> poderes = new ArrayList();
-    private Enemigo enemigo = new ProtoMaxUnits(celdaConEnemigo, poderes);
+    private Enemigo enemigo = new ProtoMaxUnits(celdaConEnemigo);
 
 
     @Given("^un Bomberman con una celda vacia al \"([^\"]*)\"$")

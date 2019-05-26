@@ -5,78 +5,43 @@ import gradle.cucumber.Celda;
 import java.util.List;
 
 public class Bomberman extends Cuerpo{
-
-	private Boolean estavivo;
-	private int cantidadDeBombasALanzar = 1;
+	
+	private Poder poder;
+	private boolean estavivo;
 
 	public Bomberman(Celda celdaActual) {
 		super(celdaActual);
+		this.setPoder(new Ninguno());
+		this.estavivo = true;
 	}
+
 
 	@Override
 	public void serDestruido() {
-		estavivo = false;
 		celdaActual.setCuerpoActual(null);
 	}
- /*
-	public Bomberman(Celda celdaActual) {
-		this.setCeldaActual(celdaActual);
-		this.getCeldaActual().setCuerpoActual(this);
-	}*/
-
-
 
     public void moverAl(String dir) {
-		if (puedeMoverAl(dir))
-		{
-    	this.getCeldaActual().setCuerpoActual(null);
     	switch(dir) {
     	  case "Sur":
-    	    this.setCeldaActual(this.getCeldaActual().getCeldaAlSur());
+    		  if (this.getCeldaActual().getCeldaAlSur() != null) this.getCeldaActual().getCeldaAlSur().recibirBomberman(this, this.getCeldaActual());
     	    break;
     	  case "Norte":
-		  this.setCeldaActual(this.getCeldaActual().getCeldaAlNorte());
+    		  if (this.getCeldaActual().getCeldaAlNorte() != null) this.getCeldaActual().getCeldaAlNorte().recibirBomberman(this, this.getCeldaActual());
     	    break;
     	  case "Este":
-		  this.setCeldaActual(this.getCeldaActual().getCeldaAlEste());
+    		  if (this.getCeldaActual().getCeldaAlEste() != null) this.getCeldaActual().getCeldaAlEste().recibirBomberman(this, this.getCeldaActual());
       	    break;
     	  case "Oeste":
-		  this.setCeldaActual(this.getCeldaActual().getCeldaAlOeste());
+    		  if (this.getCeldaActual().getCeldaAlOeste() != null) this.getCeldaActual().getCeldaAlOeste().recibirBomberman(this, this.getCeldaActual());
       	    break;
-    	}}
-
+    	}
     }
-
-	private boolean puedeMoverAl(String dir) {
-		boolean result = false;
-
-		switch(dir) {
-			case "Sur":
-				result = this.getCeldaActual().getCeldaAlSur().sePuedeMoverAca(this);
-				break;
-			case "Norte":
-				result = this.getCeldaActual().getCeldaAlNorte().sePuedeMoverAca(this);
-				break;
-			case "Este":
-				result = this.getCeldaActual().getCeldaAlEste().sePuedeMoverAca(this);
-				break;
-			case "Oeste":
-				result = this.getCeldaActual().getCeldaAlOeste().sePuedeMoverAca(this);
-				break;}
-		return result;
-	}
-
+	
 	public void dejarBomba(int ticks) {
-		if (cantidadDeBombasALanzar > 0) {
-			this.getCeldaActual().setBombaActual(new Bomba(ticks, this.getCeldaActual()));
-		}
+		this.getCeldaActual().setBombaActual(new Bomba(ticks, this.getCeldaActual()));
 	}
-
-	@Override
-	public boolean sePuedeAtravezar(Bomberman bomberman) {
-		return true;
-	}
-
+	
 	public void muere() {
         estavivo = false;
         celdaActual.setCuerpoActual(null);
@@ -90,17 +55,35 @@ public class Bomberman extends Cuerpo{
 		this.estavivo = estavivo;
 	}
 
-	public int getCantidadDeBombasALanzar() {
-		return cantidadDeBombasALanzar;
+	@Override
+	public void chocarConBomberman(Bomberman bomberman) {}
+
+	@Override
+	protected void serSaltadoPorBomberman(Bomberman bomberman, String dir) {}
+
+	@Override
+	protected void recibirBomberman(Bomberman bomberman, String dir) {}
+
+	public void saltarPared(String dir) {
+		this.getPoder().saltarPared(this, dir);
+	}
+	
+	public void lanzarBomba(int cantCeldas, String dir, int ticks) {
+		this.getPoder().lanzarBomba(this, cantCeldas, dir, ticks);
+	}
+	
+	public void soltarVariasBombas(int cantCeldas, String dir, int ticks, int cantBombas) {
+		this.getPoder().lanzarNBombas(this, cantCeldas, dir, ticks, cantBombas);
 	}
 
-	public void setCantidadDeBombasALanzar(int cantidadDeBombasALanzar) {
-		this.cantidadDeBombasALanzar = cantidadDeBombasALanzar;
+	public Poder getPoder() {
+		return poder;
 	}
+
+	public void setPoder(Poder poder) {
+		this.poder = poder;
+	}
+
+	@Override
+	protected void rebotarBomba(String dir, int ticks) {}
 }
-
-// Codigo a borrar
-/*
- public void setPosicionActual(Celda unaCelda) {
-        this.setCeldaActual(unaCelda);
-    }*/

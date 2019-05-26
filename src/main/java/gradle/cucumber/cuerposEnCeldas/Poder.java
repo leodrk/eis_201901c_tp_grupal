@@ -1,22 +1,14 @@
 package gradle.cucumber.cuerposEnCeldas;
 
-import gradle.cucumber.Celda;
-
-public abstract class Poder extends Cuerpo{
-    public Poder(Celda celdaActual) {
-        super(celdaActual);
+public abstract class Poder{
+	   
+    public void darPoder (Bomberman bomberman) {
+    	bomberman.setPoder(this);
     }
-
-    @Override
-    public void serDestruido() {
-        celdaActual.setCuerpoActual(null);
-    }
-
-    @Override
-    public boolean sePuedeAtravezar(Bomberman bomberman) {
-        activarPoder(bomberman);
-        return true;
-    }
-
-    public abstract void activarPoder(Bomberman bomberman);
+    
+    public abstract void lanzarBomba(Bomberman bomberman, int cantCeldas, String dir, int ticks);
+    
+    public abstract void saltarPared(Bomberman bomberman, String dir);
+    
+    public abstract void lanzarNBombas(Bomberman bomberman, int cantCeldas, String dir, int ticks, int cantBombas);
 }

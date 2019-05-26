@@ -3,10 +3,12 @@ package gradle.cucumber;
 import gradle.cucumber.cuerposEnCeldas.Bomba;
 import gradle.cucumber.cuerposEnCeldas.Bomberman;
 import gradle.cucumber.cuerposEnCeldas.Cuerpo;
+import gradle.cucumber.cuerposEnCeldas.Poder;
 
 public class Celda {
     private Cuerpo cuerpoActual;
     private Bomba bombaActual;
+    private Poder poderActual;
     private Celda celdaAlNorte;
     private Celda celdaAlSur;
     private Celda celdaAlEste;
@@ -51,24 +53,42 @@ public class Celda {
 	}
 
 	public void setCeldaAl(String dir, Celda celda) {
+			switch(dir) {
+	  	  case "Sur":
+	  		  this.setCeldaAlSur(celda);
+	  		  celda.setCeldaAlNorte(this);
+	  	    break;
+	  	  case "Norte":
+	  		  this.setCeldaAlNorte(celda);
+	  		  celda.setCeldaAlSur(this);
+	  	    break;
+	  	  case "Este":
+	  		  this.setCeldaAlEste(celda);
+	  		  celda.setCeldaAlOeste(this);
+	    	    break;
+	  	  case "Oeste":
+	  		  this.setCeldaAlOeste(celda);
+	  		  celda.setCeldaAlEste(this);
+	    	    break;
+	  	}
+	}
+	
+	public Celda getCeldaAl(String dir) {
 		switch(dir) {
-  	  case "Sur":
-  		  this.setCeldaAlSur(celda);
-  		  celda.setCeldaAlNorte(this);
-  	    break;
-  	  case "Norte":
-  		  this.setCeldaAlNorte(celda);
-  		  celda.setCeldaAlSur(this);
-  	    break;
-  	  case "Este":
-  		  this.setCeldaAlEste(celda);
-  		  celda.setCeldaAlOeste(this);
-    	    break;
-  	  case "Oeste":
-  		  this.setCeldaAlOeste(celda);
-  		  celda.setCeldaAlEste(this);
-    	    break;
-  	}
+	  	  case "Sur":
+	  		 if (this.getCeldaAlSur() != null) return this.getCeldaAlSur();
+	  	    break;
+	  	  case "Norte":
+	  		 if (this.getCeldaAlNorte() != null) return this.getCeldaAlNorte();
+	  	    break;
+	  	  case "Este":
+	  		 if (this.getCeldaAlEste() != null) return this.getCeldaAlEste();
+	    	    break;
+	  	  case "Oeste":
+	  		 if (this.getCeldaAlOeste() != null) return this.getCeldaAlOeste();
+	    	    break;
+	  	}
+		return null;
 	}
 
 
@@ -103,16 +123,6 @@ public class Celda {
 		}
 	}
 
-	public boolean sePuedeMoverAca(Bomberman bomberman) {
-		if (cuerpoActual == null && bombaActual == null)
-		{
-			return true;
-		} else
-		{
-			return cuerpoActual.sePuedeAtravezar(bomberman);
-		}
-	}
-
 	public void ondaExpansiva(String dir, int alcanceFaltante) {
 		if (alcanceFaltante > 0) {
 			switch(dir) {
@@ -131,6 +141,30 @@ public class Celda {
 			}
 		}
 		this.destruirObjeto();
+	}
+
+	public void recibirBomberman(Bomberman bomberman, Celda celda) {
+		if (this.getCuerpoActual() == null) {
+			this.setCuerpoActual(bomberman);
+			bomberman.setCeldaActual(this);
+			celda.setCuerpoActual(null);
+			if (this.getPoderActual() != null) {
+				bomberman.setPoder(this.getPoderActual());
+				this.setPoderActual(null);
+			}
+		}
+		else
+		{
+		this.cuerpoActual.chocarConBomberman(bomberman);
+		}
+	}
+
+	public Poder getPoderActual() {
+		return poderActual;
+	}
+
+	public void setPoderActual(Poder poderActual) {
+		this.poderActual = poderActual;
 	}
 }
 
