@@ -10,80 +10,64 @@ import java.util.List;
 
 //import static org.junit.Assert.assertTrue;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class BombermanObtienePoderDeProtoMaxUnitsSteps {
-
-    private Celda celdaAnterior = new Celda();
-    private Celda celdaNueva = new Celda();
-    private Bomberman bomberman;
-    private Celda celdaCentral = new Celda();
-    private Celda celdaAlNorte1 = new Celda();
-    private Celda celdaAlNorte2 = new Celda();
-    private Celda celdaAlNorte3 = new Celda();
-    private Celda celdaAlEste1 = new Celda();
-    private Celda celdaAlEste2 = new Celda();
-    private Celda celdaAlEste3 = new Celda();
-    private Celda celdaAlOeste1 = new Celda();
-    private Celda celdaAlOeste2 = new Celda();
-    private Celda celdaAlOeste3 = new Celda();
-    private Celda celdaAlSur1 = new Celda();
-    private Celda celdaAlSur2 = new Celda();
-    private Celda celdaAlSur3 = new Celda();
-    private List<Poder> poderes = new ArrayList<>();
-    private Poder soltarVariasBombas;
-    private Enemigo protoMax;
-
+	
+	Bomberman bomberman;
+	ProtoMaxUnits protoMax;
+	Celda celdaCentral;
+	Celda celdaAlNorte;
+	Celda celdaAlNorte1;
+	Celda celdaAlNorte2;
+	Celda celdaAlNorte3;
+	Acero pared;
+    
 
     @Given("^un bomberman que tiene a un enemigo Proto Max Unit en una celda contigua al \"([^\"]*)\"$")
     public void un_bomberman_que_tiene_a_un_enemigo_Proto_Max_Unit_en_una_celda_contigua_al(String dir) {
-
-        poderes.add(soltarVariasBombas);
-        celdaCentral.setCeldaAlNorte(celdaAlNorte1);
-        soltarVariasBombas = new SoltarVariasBombas(celdaAlNorte1, 5);
-        poderes.add(soltarVariasBombas);
-        protoMax = new ProtoMaxUnits(celdaAlNorte1, poderes );
-        celdaAlNorte2.setCeldaAl("Norte", celdaAlNorte3);
-        celdaAlNorte1.setCeldaAl("Norte", celdaAlNorte2);
-
-        celdaAlEste2.setCeldaAl("Este", celdaAlEste3);
-        celdaAlEste1.setCeldaAl("Este", celdaAlEste2);
-        celdaCentral.setCeldaAl("Este", celdaAlEste1);
-
-        celdaAlOeste2.setCeldaAl("Oeste", celdaAlOeste3);
-        celdaAlOeste1.setCeldaAl("Oeste", celdaAlOeste2);
-        celdaCentral.setCeldaAl("Oeste", celdaAlOeste1);
-
-        celdaAlEste2.setCeldaAl("Este", celdaAlEste3);
-        celdaAlEste1.setCeldaAl("Este", celdaAlEste2);
-        celdaCentral.setCeldaAl("Este", celdaAlEste1);
-        bomberman = new Bomberman(celdaCentral);
-
-        // creeeo que no hacia falta setear tooodo esto. de ultima se borra :s
+    	celdaCentral = new Celda();
+    	celdaAlNorte = new Celda();
+    	celdaAlNorte1 = new Celda();
+    	celdaAlNorte2 = new Celda();
+    	celdaAlNorte3 = new Celda();
+    	protoMax = new ProtoMaxUnits(celdaAlNorte);
+    	celdaCentral.setCeldaAl(dir, celdaAlNorte);
+    	bomberman = new Bomberman(celdaCentral);
     }
 
-    @Given("^Bomberman suelta una bomba$")
-    public void bomberman_suelta_una_bomba() {
-        bomberman.dejarBomba(1);
+    @Given("^una pared en la celda al \"([^\"]*)\"$")
+    public void una_pared_en_la_celda_al(String dir) {
+    	pared = new Acero(celdaAlNorte1);
+    	celdaAlNorte.setCeldaAl(dir, celdaAlNorte1);
+    	celdaAlNorte1.setCuerpoActual(pared);
+    	celdaAlNorte1.setCeldaAl(dir, celdaAlNorte2);
+    	celdaAlNorte2.setCeldaAl(dir, celdaAlNorte3);
     }
 
-    @When("^la bomba alcanza a Proto Max Unit este muere dropeando el poder de lanzar varias bombas a la vez$")
-    public void la_bomba_alcanza_a_Proto_Max_Unit_este_muere_dropeando_el_poder_de_lanzar_varias_bombas_a_la_vez() {
-        Celda celdaSegura = new Celda();
-        bomberman.setCeldaActual(celdaSegura);
-        celdaCentral.getBombaActual().restarTick();
+    @When("^bomberman deja una bomba y esta explota matando a ProtoMaxUnits y su nuevo poder luego de moverse a la celda del \"([^\"]*)\"$")
+    public void bomberman_deja_una_bomba_y_esta_explota_matando_a_ProtoMaxUnits_y_su_nuevo_poder_luego_de_moverse_a_la_celda_del(String dir) {
+       bomberman.dejarBomba(1);
+       celdaCentral.tick();
+       bomberman.moverAl(dir);
+       bomberman.saltarPared(dir);
+       bomberman.soltarVariasBombas(1, dir, 2,2);
     }
 
-    @When("^bomberman se mueve a la celda del \"([^\"]*)\"$")
-    public void bomberman_se_mueve_a_la_celda_del(String dir) {
-        bomberman.setCeldaActual(celdaCentral);
-        bomberman.moverAl(dir);
+    @Then("^bomberman obtiene el poder de protoMax Units$")
+    public void bomberman_obtiene_el_poder_de_protoMax_Units() {
+    	
+    	assertNotEquals(bomberman.getPoder().getClass(), Ninguno.class);
+    	assertEquals(celdaCentral.getCuerpoActual(), null);
+    	
+    	//este assert confirma si, bomberman salto la pared, o bien lanzo 2 bombas en la direccion dada. 
+    	//Tomar en cuenta que ProtoMax Units puede soltar cualquiera de los 2 poderes aleatoriamente.
+    	assertTrue	((celdaAlNorte.getCuerpoActual() == null && celdaAlNorte2.getCuerpoActual() != null) || 
+    				(celdaAlNorte.getCuerpoActual() != null && celdaAlNorte1.getBombaActual() == null 
+    				&& celdaAlNorte2.getBombaActual() != null && celdaAlNorte3.getBombaActual() != null));
     }
-    @Then("^bomberman puede lanzar mas de una bomba a la vez$")
-    public void bomberman_puede_lanzar_mas_de_una_bomba_a_la_vez() {
-       // assertTrue(bomberman.getCantidadDeBombasALanzar()> 1);
-        assertTrue(bomberman.getCantidadDeBombasALanzar() > 0);
-
-    }
+    
 }
 
 /*

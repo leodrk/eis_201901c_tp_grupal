@@ -6,16 +6,29 @@ public class Enemigo extends Cuerpo {
     public Enemigo(Celda celdaActual) {
         super(celdaActual);
     }
-
-    @Override
-    public boolean sePuedeAtravezar(Bomberman bomberman) {
-        bomberman.muere();
-        return true;
-    }
     
     @Override
     public void serDestruido() {
     	this.getCeldaActual().setCuerpoActual(null);
     }
+
+	@Override
+	public void chocarConBomberman(Bomberman bomberman) {
+		bomberman.muere();
+	}
+
+	@Override
+	protected void serSaltadoPorBomberman(Bomberman bomberman, String dir) {
+	}
+
+	@Override
+	protected void recibirBomberman(Bomberman bomberman, String dir) {
+		bomberman.muere();
+	}
+
+	@Override
+	protected void rebotarBomba(String dir, int ticks) {
+		this.getCeldaActual().setBombaActual(new Bomba(ticks, this.getCeldaActual()));
+	}
 
 }
