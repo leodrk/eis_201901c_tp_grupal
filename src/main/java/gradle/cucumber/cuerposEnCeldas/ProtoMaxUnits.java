@@ -8,13 +8,9 @@ import java.util.Random;
 
 public class ProtoMaxUnits extends Enemigo {
 
-    private List<Poder> poderesADropear= new ArrayList();
-
-    public ProtoMaxUnits(Celda celdaActual, List<Poder> poderes ) {
+    public ProtoMaxUnits(Celda celdaActual) {
         super(celdaActual);
-        poderesADropear = poderes;
     }
-
 
     @Override
     public void serDestruido() {
@@ -24,8 +20,12 @@ public class ProtoMaxUnits extends Enemigo {
 
     public void dropearItemRandom(){
         Random rand = new Random();
-        Poder randomPoder = poderesADropear.get(rand.nextInt(poderesADropear.size()));
-
-        celdaActual.setCuerpoActual(randomPoder);
+        if (rand.nextBoolean()) {
+        	this.getCeldaActual().setPoderActual(new SoltarVariasBombas());
+        }
+        else
+        	{
+        	this.getCeldaActual().setPoderActual(new SaltarParedes());
+        }
     }
 }
