@@ -94,6 +94,6 @@ public class Bomberman extends Cuerpo{
 
 	@Override
 	protected void setPoder(Ninguno ninguno) {
-
+		poder = ninguno;
 	}
 }
