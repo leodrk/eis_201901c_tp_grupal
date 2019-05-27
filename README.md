@@ -18,7 +18,7 @@ Nro | Nombre | Legajo | Mail
 1   |   Marcelo Leonel Martos     | 20666        | martos.marcelo@gmail.com
 2   |   Eric Jorge Arnez Inochea  | 26806        | ericarnez@gmail.com
 3   |   Andres David Dominguez    |              | addominguez19@ucatolica.edu.co
-4   |        |        |
+4   |  	Julian Elias Bernal       | 34002        | bernaljuliane@gmail.com
     
 ### Entrega
 
