@@ -2,7 +2,8 @@ package gradle.cucumber.cuerposEnCeldas;
 
 import gradle.cucumber.Celda;
 
-public class ProtoMaxJr extends Cuerpo {
+
+public class ProtoMaxJr extends Enemigo {
 
     private Poder poder;
     private boolean estavivo;
@@ -15,6 +16,8 @@ public class ProtoMaxJr extends Cuerpo {
 
     @Override
     public void serDestruido() {
+        celdaActual.setCuerpoActual(null);
+        getCeldaActual().setPoderActual(new SaltarParedes());
 
     }
 
@@ -38,17 +41,14 @@ public class ProtoMaxJr extends Cuerpo {
 
     }
 
-    @Override
-    protected void setPoder(Ninguno ninguno) {
+    public void setPoder(Poder ninguno) {
 
     }
 
-    @Override
     public void dejarBomba(int parseInt) {
 
     }
 
-    @Override
     public void dejarPoder(int parseInt) {
 
     }
