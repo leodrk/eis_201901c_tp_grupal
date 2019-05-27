@@ -2,6 +2,7 @@ package gradle.cucumber.cuerposEnCeldas;
 
 import gradle.cucumber.Celda;
 
+
 public class ProtoMaxJr extends Enemigo {
 
     private Poder poder;
@@ -15,9 +16,9 @@ public class ProtoMaxJr extends Enemigo {
 
     @Override
     public void serDestruido() {
-
         celdaActual.setCuerpoActual(null);
         getCeldaActual().setPoderActual(new SaltarParedes());
+
     }
 
     @Override
@@ -40,16 +41,13 @@ public class ProtoMaxJr extends Enemigo {
 
     }
 
-
     public void setPoder(Poder ninguno) {
 
     }
 
-
     public void dejarBomba(int parseInt) {
 
     }
-
 
     public void dejarPoder(int parseInt) {
 

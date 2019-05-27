@@ -1,4 +1,4 @@
-## Objetivos del TP grupal
+﻿## Objetivos del TP grupal
 tEjercitar la escritura de código en ambientes colaborativos utilizando una metodología de diseño guiada por pruebas ejecutanto un flujo de trabajo que facilite la integración frecuente de código.
 
 ### Lo que se espera

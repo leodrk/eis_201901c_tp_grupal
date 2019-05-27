@@ -33,4 +33,19 @@ public class Enemigo extends Cuerpo {
 		this.getCeldaActual().setBombaActual(new Bomba(ticks, this.getCeldaActual()));
 	}
 
+	@Override
+	protected void setPoder(Ninguno ninguno) {
+
+	}
+
+	@Override
+	public void dejarBomba(int parseInt) {
+
+	}
+
+	@Override
+	public void dejarPoder(int parseInt) {
+
+	}
+
 }
